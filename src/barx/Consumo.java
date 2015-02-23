@@ -63,6 +63,12 @@ public class Consumo {
         this.credito = credito;
         this.saldoParcial = saldoParcial;
         this.detalle = detalle;
+        this.beneficiario = "";
+        this.categoria = "";
+        this.subcategoria = "";
+        this.numero = 0;
+        this.toFrom = "";
+
     }
 
 }

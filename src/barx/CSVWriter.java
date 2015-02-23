@@ -32,7 +32,6 @@ public class CSVWriter {
     public String sep;
     public SimpleDateFormat dateFormat;
 
-    
     public CSVWriter(String sep, SimpleDateFormat dateFormat) {
         this.sep = sep;
         this.dateFormat = dateFormat;
@@ -51,8 +50,9 @@ public class CSVWriter {
                     + c.movimiento + sep
                     + c.categoria + sep
                     + c.subcategoria + sep
-                    + c.numero + c.detalle
-                    + c.toFrom;
+                    + c.numero + sep
+                    + c.detalle + sep
+                    + c.toFrom + "\n";
 
         }
 

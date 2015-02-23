@@ -40,54 +40,77 @@ import org.jsoup.nodes.Element;
 public class GaliciaParser {
 
     private Document doc;
+    NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
+    SimpleDateFormat standardDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     GaliciaParser(Document aDoc) {
         doc = aDoc;
     }
 
-    void getSaldo(List<Date> t, List<Double> saldo) throws IOException, ParseException {
-
-        //
+    /**
+     * Devuelve los consumos de un resumen.
+     *
+     */
+    List<Consumo> getConsumos() {
+        List<Consumo> c = new ArrayList();
 
         //Element table = doc.select("table class=\"noBorderTop\" width=\"590\" cellpadding=\"0\" cellspacing=\"0\"").first();
         Element table = doc.select("table.noBorderTop[width=590]").first();
 
         Iterator<Element> row = table.select("tr").iterator();
 
-        SimpleDateFormat standardDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        
         //row.next(); // first one is header, skip
         while (row.hasNext()) {
 
             Iterator<Element> td = row.next().select("td").iterator();
             String fecha = td.next().text();//fecha
-            String lugar = td.next().text();//debito
-            String debito = td.next().text();//debito
-            String credito = td.next().text();//credito
+            String movimiento = td.next().text();//debito
+            String debitoAsString = td.next().text();//debito
+            String creditoAsString = td.next().text();//credito
             String saldoAsText = td.next().text();//saldo
+            String detalle = td.next().text();//detalle
 
-            System.out.println("Fecha:" + fecha + "Lugar:\t" + lugar + "\tSaldo:" + saldoAsText); //
+            // Debug only
+            System.out.println("Fecha:" + fecha + "Lugar:\t" + movimiento + "\tSaldo:" + saldoAsText); //
 
             try {
                 //Parseo la fecha 
-                t.add(standardDateFormat.parse(fecha));
+                Date date = standardDateFormat.parse(fecha);
+
+                //Parseo el debito
+                Number debitoAsNumber = format.parse(debitoAsString);
+                double debitoAsDouble = debitoAsNumber.doubleValue();
+
+                //Parseo el credito
+                Number creditoAsNumber = format.parse(creditoAsString);
+                double creditoAsDouble = creditoAsNumber.doubleValue();
+
                 //Parseo el saldo
-                NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
-                Number number = format.parse(saldoAsText);
-                double d = number.doubleValue();
-                saldo.add(d);
-                
+                Number saldo = format.parse(saldoAsText);
+                double saldoAsDouble = saldo.doubleValue();
+
+                c.add(new Consumo(date, movimiento, debitoAsDouble, creditoAsDouble, saldoAsDouble, detalle));
+
             } catch (ParseException ex) {
                 Logger.getLogger(GaliciaParser.class.getName()).log(Level.SEVERE, null, ex);
-                //throw new ParseException("a",1);
+                //throw new ParseException("a",1); TODO define better exception handling
             }
-           
+
         }
-    }
-    
-    List<Consumo> getConsumos(){
-        List<Consumo> c = new ArrayList();
-        c.add(new Consumo());
+
         return c;
+    }
+
+    /**
+     * Devuelve el saldo de un resumen.
+     *
+     */
+    void getSaldo(List<Date> t, List<Double> saldo) throws IOException, ParseException {
+
+        List<Consumo> con = getConsumos();
+        for (Consumo c : con) {
+            t.add(c.fecha);
+            saldo.add(c.saldoParcial);
+        }
     }
 }
