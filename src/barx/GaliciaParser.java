@@ -24,9 +24,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;
@@ -54,12 +56,9 @@ public class GaliciaParser {
     List<Consumo> getConsumos() {
         List<Consumo> c = new ArrayList();
 
-        //Element table = doc.select("table class=\"noBorderTop\" width=\"590\" cellpadding=\"0\" cellspacing=\"0\"").first();
         Element table = doc.select("table.noBorderTop[width=590]").first();
-
         Iterator<Element> row = table.select("tr").iterator();
 
-        //row.next(); // first one is header, skip
         while (row.hasNext()) {
 
             Iterator<Element> td = row.next().select("td").iterator();
@@ -73,6 +72,12 @@ public class GaliciaParser {
             // Debug only
             System.out.println("Fecha:" + fecha + "Lugar:\t" + movimiento + "\tSaldo:" + saldoAsText); //
 
+            // Intento de que tipo de gasto se trata
+            Map<String,String> mapa = new HashMap();
+            AccountMatcher am = new AccountMatcher(mapa);
+            String cuenta = am.findMatch(movimiento);
+
+            // Parseo de fechas y números
             try {
                 //Parseo la fecha 
                 Date date = standardDateFormat.parse(fecha);
@@ -89,8 +94,10 @@ public class GaliciaParser {
                 Number saldo = format.parse(saldoAsText);
                 double saldoAsDouble = saldo.doubleValue();
 
-                c.add(new Consumo(date, movimiento, debitoAsDouble, creditoAsDouble, saldoAsDouble, detalle));
-
+                Consumo consumo = new Consumo(date, movimiento, debitoAsDouble, creditoAsDouble, saldoAsDouble, detalle);
+                consumo.setCuenta(cuenta);
+                c.add(consumo);
+                
             } catch (ParseException ex) {
                 Logger.getLogger(GaliciaParser.class.getName()).log(Level.SEVERE, null, ex);
                 //throw new ParseException("a",1); TODO define better exception handling

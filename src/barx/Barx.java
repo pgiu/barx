@@ -34,7 +34,7 @@ import org.jsoup.nodes.Document;
  *
  * @author pgiudice
  */
-public class GaliciaReader {
+public class Barx {
 
     /**
      * @param args the command line arguments
@@ -79,7 +79,7 @@ public class GaliciaReader {
 
             
         } catch (IOException ex) {
-            Logger.getLogger(GaliciaReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Barx.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

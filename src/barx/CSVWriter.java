@@ -44,12 +44,22 @@ public class CSVWriter {
         for (Consumo c : consumos) {
             String date = dateFormat.format(c.fecha);
 
+            /*content += date + sep
+             + c.beneficiario + sep
+             + (c.credito - c.debito) + sep
+             + c.categoria + sep
+             + c.subcategoria + sep
+             + c.numero + sep
+             + c.detalle + sep
+             + c.toFrom + "\n";*/
+            
             content += date + sep
+                    + c.numero + sep
                     + c.beneficiario + sep
-                    + (c.credito - c.debito) + sep
+                    + c.credito + sep
+                    + c.debito + sep
                     + c.categoria + sep
                     + c.subcategoria + sep
-                    + c.numero + sep
                     + c.detalle + sep
                     + c.toFrom + "\n";
 

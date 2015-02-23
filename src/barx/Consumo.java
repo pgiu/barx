@@ -41,7 +41,8 @@ public class Consumo {
     public String subcategoria;
     public int numero;
     public String toFrom;
-
+    public String cuenta; // De donde se saca/pone el dinero
+    
     public Consumo() {
         this.fecha = new Date();
         //this.movimiento = "";
@@ -71,4 +72,11 @@ public class Consumo {
 
     }
 
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
 }
