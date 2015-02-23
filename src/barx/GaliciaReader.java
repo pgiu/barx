@@ -66,7 +66,7 @@ public class GaliciaReader {
             //Exporto a formato CSV 
             CSVWriter cw = new CSVWriter(",",new SimpleDateFormat("dd/MM/yyyy"));
 
-            cw.writeCSV("test.csv", gp.getConsumos());
+            cw.writeCSV("output\\test.csv", gp.getConsumos());
             
             //Exporto a formato QIF (TBD)
 
