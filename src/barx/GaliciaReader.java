@@ -41,9 +41,16 @@ public class GaliciaReader {
      */
     public static void main(String[] args) throws ParseException {
 
+        if (args.length!=2){
+            System.out.println("Faltan parámetros\n"+
+                    "Para llamar a este programa haga:\n"+
+                    ">java barx resumen.html output.csv");
+            return;
+        }
         try {
             //Abro el origen de los datos
-            File input = new File("samples\\Resumen2015.htm");
+            //File input = new File("samples\\Resumen2015.htm");
+            File input = new File(args[0]);
             Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/"); 
 
             // Parseo los datos
@@ -66,7 +73,7 @@ public class GaliciaReader {
             //Exporto a formato CSV 
             CSVWriter cw = new CSVWriter(",",new SimpleDateFormat("dd/MM/yyyy"));
 
-            cw.writeCSV("output\\test.csv", gp.getConsumos());
+            cw.writeCSV(args[1], gp.getConsumos());
             
             //Exporto a formato QIF (TBD)
 

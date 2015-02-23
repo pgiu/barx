@@ -21,7 +21,8 @@ Por ahora funciona de la siguiente manera:
 - Guardar la página a un archivo. 
 - Buscar en la carpeta donde se guardó el archivo resumen.htm (contiene la información relevante) y copiarlo a la carpeta dist de este proyecto.
 - Hacer 
-	java barx.jar resumen.htm output.csv 
+	java -jar GaliciaReader.jar Resumen2015.htm  output.csv
+(*nota* puede que haya errores o warnings, ignorarlos)
 - Importar output.csv en MoneyManagerEx usando la opción Formato MMEX y fecha en formato DD-MM-YYYY
 
 
