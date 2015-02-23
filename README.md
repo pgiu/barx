@@ -15,3 +15,8 @@ Por eso decidí iniciar este pequeño programa con el cual satisfacer mi necesid
 # Disclaimer
 Bajo ningún punto estoy afiliado o tengo intereses con el Banco Galica. Este programa se distribuye bajo licencia GNU. 
 Siéntase libre de modificarlo a gusto siempre que cite este desarrollo como original. 
+
+# Dependencias y librerias
+Este programa usa: 
+- **jsoup** (http://jsoup.org) para el parseo
+- **jfreechart** (http://jfree.org) para los graficos
