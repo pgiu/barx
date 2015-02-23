@@ -34,3 +34,9 @@ Siéntase libre de modificarlo a gusto siempre que cite este desarrollo como ori
 Este programa usa: 
 - **jsoup** (http://jsoup.org) para el parseo
 - **jfreechart** (http://jfree.org) para los graficos
+
+# To Do list
+Esta no es una lista exhaustiva pero es un recordatorio de lo que sería interesante que este software pudiera hacer.
+- clasificación automática por categoría y subcategoria. Debería poder buscar regexps en el campo *movimiento* de la página del banco y mapearlo a un conjunto de categorías. Así se podría saber cuanto se consumo en un mismo local, o bien en un mismo rubro. 
+- detección de cobro de sueldo. Debería poder unirse las categorías como SAC, Bonos, Sueldo bajo un mismo paraguas para poder identificar cuanto se cobró de un mismo empleador. 
+- unificación de los intereses ganados / descuentos / etc.
