@@ -47,7 +47,6 @@ public class CSVWriter {
             content += date + sep
                     + c.beneficiario + sep
                     + (c.credito - c.debito) + sep
-                    + c.movimiento + sep
                     + c.categoria + sep
                     + c.subcategoria + sep
                     + c.numero + sep

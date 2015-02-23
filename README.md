@@ -1,5 +1,5 @@
 # barx
-**barx** (**B**ancos **Ar**gentinos e**x**porter) es un exportador de información del estado de cuenta de Banco Galicia a CSV/QIF para usar en MoneyManagerEx, GnuCash, etc.
+**barx** (**b**ancos **ar**gentinos e**x**porter) es un exportador de información del estado de cuenta de Banco Galicia a CSV/QIF para usar en MoneyManagerEx, GnuCash, etc.
 
 # Objetivo y motivación
 **barx** es un parser para la información que da el Banco Galicia en su servicio de Home Banking.
@@ -11,14 +11,26 @@ La intención es escribir un código que pueda ser capaz de:
 Soy cliente del Banco Galicia y no encontré forma de *sacar* los datos (que son mios) en un formato accesible para cualquier programa de gestión de finanzas. 
 Por eso decidí iniciar este pequeño programa con el cual satisfacer mi necesidad. 
 
+# Build
+Para hacer el build desde netbeans o bien por linea de comando. Debería generarse el directorio dist/ con el .jar correcto junto con las librerias externas.
+
 # Uso 
-TBD
+Por ahora funciona de la siguiente manera: 
+- Entrar en https://wsec01.bancogalicia.com.ar/scripts/homebanking/GalHBlogin.asp con su número de DNI y contraseña
+- Ir a la página del resumen 
+- Guardar la página a un archivo. 
+- Buscar en la carpeta donde se guardó el archivo resumen.htm (contiene la información relevante) y copiarlo a la carpeta dist de este proyecto.
+- Hacer 
+	java barx.jar resumen.htm output.csv 
+- Importar output.csv en MoneyManagerEx usando la opción Formato MMEX y fecha en formato DD-MM-YYYY
+
+
 
 # Disclaimer
-Bajo ningún punto estoy afiliado o tengo intereses con el Banco Galica. Este programa se distribuye bajo licencia GNU. 
+Bajo ningún punto estoy afiliado o tengo intereses con el Banco Galicia. Este programa se distribuye bajo licencia GNU. 
 Siéntase libre de modificarlo a gusto siempre que cite este desarrollo como original. 
 
-# Dependencias y librerias
+# Dependencias y librerías externas
 Este programa usa: 
 - **jsoup** (http://jsoup.org) para el parseo
 - **jfreechart** (http://jfree.org) para los graficos

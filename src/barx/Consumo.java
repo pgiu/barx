@@ -29,7 +29,7 @@ public class Consumo {
 
     //As seen on Banco Galicia Balance
     public Date fecha;
-    public String movimiento;
+    //public String movimiento;
     public double debito;
     public double credito;
     public double saldoParcial;
@@ -44,7 +44,7 @@ public class Consumo {
 
     public Consumo() {
         this.fecha = new Date();
-        this.movimiento = "";
+        //this.movimiento = "";
         this.debito = 0;
         this.credito = 0;
         this.saldoParcial = 0;
@@ -56,14 +56,14 @@ public class Consumo {
         this.toFrom = "";
     }
 
-    public Consumo(Date fecha, String movimiento, double debito, double credito, double saldoParcial, String detalle) {
+    public Consumo(Date fecha, String beneficiario, double debito, double credito, double saldoParcial, String detalle) {
         this.fecha = fecha;
-        this.movimiento = movimiento;
+        //this.movimiento = movimiento;
         this.debito = debito;
         this.credito = credito;
         this.saldoParcial = saldoParcial;
         this.detalle = detalle;
-        this.beneficiario = "";
+        this.beneficiario = beneficiario;
         this.categoria = "";
         this.subcategoria = "";
         this.numero = 0;

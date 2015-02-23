@@ -70,6 +70,7 @@ public class GaliciaReader {
             
             //Exporto a formato QIF (TBD)
 
+            
         } catch (IOException ex) {
             Logger.getLogger(GaliciaReader.class.getName()).log(Level.SEVERE, null, ex);
         }
