@@ -1,9 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015 pgiudice
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package galiciareader;
+package barx;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +39,7 @@ import org.jsoup.nodes.Element;
  */
 public class GaliciaParser {
 
-    Document doc;
+    private Document doc;
 
     GaliciaParser(Document aDoc) {
         doc = aDoc;
@@ -69,9 +81,13 @@ public class GaliciaParser {
                 Logger.getLogger(GaliciaParser.class.getName()).log(Level.SEVERE, null, ex);
                 //throw new ParseException("a",1);
             }
-
-            
+           
         }
-
+    }
+    
+    List<Consumo> getConsumos(){
+        List<Consumo> c = new ArrayList();
+        c.add(new Consumo());
+        return c;
     }
 }
