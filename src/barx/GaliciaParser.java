@@ -42,11 +42,29 @@ import org.jsoup.nodes.Element;
 public class GaliciaParser {
 
     private Document doc;
-    NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
-    SimpleDateFormat standardDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
+    private SimpleDateFormat standardDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private Map<String, String> map;
 
-    GaliciaParser(Document aDoc) {
-        doc = aDoc;
+    /**
+     * Constructor sin mapa de consumos.
+     *
+     * @param doc es el documento a leer
+     */
+    GaliciaParser(Document doc) {
+        this.doc = doc;
+    }
+
+    /**
+     * Constructor con mapa de consumos.
+     *
+     * @param doc es el documento a leer
+     * @param map cuyas claves son regexs y los valores son la cuenta a la cual
+     * se asigna el consumo.
+     */
+    GaliciaParser(Document doc, Map<String, String> map) {
+        this.doc = doc;
+        this.map = map;
     }
 
     /**
@@ -54,10 +72,14 @@ public class GaliciaParser {
      *
      */
     List<Consumo> getConsumos() {
+
         List<Consumo> c = new ArrayList();
 
         Element table = doc.select("table.noBorderTop[width=590]").first();
         Iterator<Element> row = table.select("tr").iterator();
+
+        //
+        AccountMatcher am = new AccountMatcher(map);
 
         while (row.hasNext()) {
 
@@ -73,8 +95,6 @@ public class GaliciaParser {
             System.out.println("Fecha:" + fecha + "Lugar:\t" + movimiento + "\tSaldo:" + saldoAsText); //
 
             // Intento de que tipo de gasto se trata
-            Map<String,String> mapa = new HashMap();
-            AccountMatcher am = new AccountMatcher(mapa);
             String cuenta = am.findMatch(movimiento);
 
             // Parseo de fechas y números
@@ -97,7 +117,7 @@ public class GaliciaParser {
                 Consumo consumo = new Consumo(date, movimiento, debitoAsDouble, creditoAsDouble, saldoAsDouble, detalle);
                 consumo.setCuenta(cuenta);
                 c.add(consumo);
-                
+
             } catch (ParseException ex) {
                 Logger.getLogger(GaliciaParser.class.getName()).log(Level.SEVERE, null, ex);
                 //throw new ParseException("a",1); TODO define better exception handling
@@ -110,7 +130,7 @@ public class GaliciaParser {
 
     /**
      * Devuelve el saldo de un resumen.
-     *
+     * 
      */
     void getSaldo(List<Date> t, List<Double> saldo) throws IOException, ParseException {
 

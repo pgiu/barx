@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.ui.RefineryUtilities;
@@ -41,20 +42,31 @@ public class Barx {
      */
     public static void main(String[] args) throws ParseException {
 
-        if (args.length!=2){
-            System.out.println("Faltan parámetros\n"+
-                    "Para llamar a este programa haga:\n"+
-                    ">java barx resumen.html output.csv");
+        if (args.length != 2 && args.length != 3) {
+            System.out.println("Faltan parámetros\n"
+                    + "Para llamar a este programa haga:\n"
+                    + ">java barx resumen.html output.csv categorias.csv");
             return;
         }
+
         try {
             //Abro el origen de los datos
-            //File input = new File("samples\\Resumen2015.htm");
             File input = new File(args[0]);
-            Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/"); 
+            Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+
+            GaliciaParser gp;
+
+            if (args.length == 3) {
+                Map<String, String> map;
+                String splitby = ";";
+                CSVReader rcsv = new CSVReader(args[2], splitby);
+                map = rcsv.read();
+                gp = new GaliciaParser(doc, map);
+            } else {
+                gp = new GaliciaParser(doc);
+            }
 
             // Parseo los datos
-            GaliciaParser gp = new GaliciaParser(doc);
             List<Date> t = new ArrayList();
             List<Double> saldo = new ArrayList();
             gp.getSaldo(t, saldo);
@@ -71,16 +83,14 @@ public class Barx {
             chart.setVisible(true);
 
             //Exporto a formato CSV 
-            CSVWriter cw = new CSVWriter(",",new SimpleDateFormat("dd/MM/yyyy"));
+            CSVWriter cw = new CSVWriter(",", new SimpleDateFormat("dd/MM/yyyy"));
 
             cw.writeCSV(args[1], gp.getConsumos());
-            
-            //Exporto a formato QIF (TBD)
 
-            
+            //Exporto a formato QIF (TBD)
         } catch (IOException ex) {
             Logger.getLogger(Barx.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
 }

@@ -61,7 +61,7 @@ public class CSVWriter {
                     + c.categoria + sep
                     + c.subcategoria + sep
                     + c.detalle + sep
-                    + c.toFrom + "\n";
+                    + c.cuenta + "\n";
 
         }
 
