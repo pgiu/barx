@@ -1,3 +1,10 @@
+package barx;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 /*
  * Copyright (C) 2015 pgiudice
  *
@@ -15,34 +22,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package barx;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 /**
  *
  * @author pgiudice
  */
-public class CSVWriter {
+public class QIFWriter {
 
-    //As seen on MoneyManager
-    public String sep;
-    public SimpleDateFormat dateFormat;
     private String outputFileName;
-
-    public CSVWriter(String filename, String sep, SimpleDateFormat dateFormat) {
-        this.outputFileName = filename;
-        this.sep = sep;
-        this.dateFormat = dateFormat;
+    private SimpleDateFormat dateFormat;
+    QIFWriter(String outputFileName, SimpleDateFormat dateFormat) {
+        this.outputFileName = outputFileName;
     }
 
-    public void writeCSV(List<Consumo> consumos) throws IOException {
-
+    public void writeQIF(List<Consumo> consumos ) throws IOException {
         String content = "";
-
+        
         for (Consumo c : consumos) {
             String date = dateFormat.format(c.fecha);
 
@@ -54,7 +48,8 @@ public class CSVWriter {
              + c.numero + sep
              + c.detalle + sep
              + c.toFrom + "\n";*/
-            content += date + sep
+            
+            /*content += date + sep
                     + c.numero + sep
                     + c.beneficiario + sep
                     + c.credito + sep
@@ -62,7 +57,7 @@ public class CSVWriter {
                     + c.categoria + sep
                     + c.subcategoria + sep
                     + c.detalle + sep
-                    + c.cuenta + "\n";
+                    + c.cuenta + "\n";*/
 
         }
 
@@ -70,7 +65,5 @@ public class CSVWriter {
         writer.append(content);
         writer.flush();
         writer.close();
-
     }
-
 }

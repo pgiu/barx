@@ -53,7 +53,7 @@ public class Barx {
             //Abro el origen de los datos
             File input = new File(args[0]);
             Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
-
+            String outputFileName = args[1];
             GaliciaParser gp;
 
             if (args.length == 3) {
@@ -82,12 +82,15 @@ public class Barx {
             RefineryUtilities.centerFrameOnScreen(chart);
             chart.setVisible(true);
 
+            List<Consumo> consumos = gp.getConsumos();
             //Exporto a formato CSV 
-            CSVWriter cw = new CSVWriter(",", new SimpleDateFormat("dd/MM/yyyy"));
-
-            cw.writeCSV(args[1], gp.getConsumos());
+            CSVWriter cw = new CSVWriter(outputFileName+".csv",",", new SimpleDateFormat("dd/MM/yyyy"));
+            cw.writeCSV(consumos);
 
             //Exporto a formato QIF (TBD)
+            QIFWriter qw = new QIFWriter(outputFileName + ".qif", new SimpleDateFormat("dd/MM/yyyy"));
+            qw.writeQIF(consumos);
+            
         } catch (IOException ex) {
             Logger.getLogger(Barx.class.getName()).log(Level.SEVERE, null, ex);
         }
