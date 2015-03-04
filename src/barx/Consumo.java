@@ -36,7 +36,7 @@ public class Consumo {
     public String detalle; // == detalles en MoneyManagerEx
 
     //As seen on MoneyManager
-    public String beneficiario;
+    public String movimiento;
     public String categoria;
     public String subcategoria;
     public int numero;
@@ -50,21 +50,21 @@ public class Consumo {
         this.credito = 0;
         this.saldoParcial = 0;
         this.detalle = "";
-        this.beneficiario = "";
+        this.movimiento = "";
         this.categoria = "";
         this.subcategoria = "";
         this.numero = 0;
         this.toFrom = "";
     }
 
-    public Consumo(Date fecha, String beneficiario, double debito, double credito, double saldoParcial, String detalle) {
+    public Consumo(Date fecha, String movimiento, double debito, double credito, double saldoParcial, String detalle) {
         this.fecha = fecha;
         //this.movimiento = movimiento;
         this.debito = debito;
         this.credito = credito;
         this.saldoParcial = saldoParcial;
         this.detalle = detalle;
-        this.beneficiario = beneficiario;
+        this.movimiento = movimiento;
         this.categoria = "";
         this.subcategoria = "";
         this.numero = 0;

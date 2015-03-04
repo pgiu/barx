@@ -56,7 +56,7 @@ public class CSVWriter {
              + c.toFrom + "\n";*/
             content += date + sep
                     + c.numero + sep
-                    + c.beneficiario + sep
+                    + c.movimiento + sep
                     + c.credito + sep
                     + c.debito + sep
                     + c.categoria + sep

@@ -71,6 +71,7 @@ public class AccountMatcher {
         m.put("(?i)atalaya", "Expenses:Dining");
         m.put("(?i)interes", "Income:Interes");
         m.put("(?i)COMPRA DE DOLARES", "Assets:USD-Casa");
+        m.put("ACREDITAMIENTO DE HABERES", "Income:Salary:Autotrol");
 
         AccountMatcher am = new AccountMatcher(m);
 

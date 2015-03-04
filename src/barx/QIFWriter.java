@@ -30,34 +30,25 @@ public class QIFWriter {
 
     private String outputFileName;
     private SimpleDateFormat dateFormat;
+
     QIFWriter(String outputFileName, SimpleDateFormat dateFormat) {
         this.outputFileName = outputFileName;
+        this.dateFormat = dateFormat;
     }
 
-    public void writeQIF(List<Consumo> consumos ) throws IOException {
-        String content = "";
-        
+    public void writeQIF(List<Consumo> consumos) throws IOException {
+
+        //Header info
+        String content = "!Type:Bank\n";
+
         for (Consumo c : consumos) {
             String date = dateFormat.format(c.fecha);
 
-            /*content += date + sep
-             + c.beneficiario + sep
-             + (c.credito - c.debito) + sep
-             + c.categoria + sep
-             + c.subcategoria + sep
-             + c.numero + sep
-             + c.detalle + sep
-             + c.toFrom + "\n";*/
-            
-            /*content += date + sep
-                    + c.numero + sep
-                    + c.beneficiario + sep
-                    + c.credito + sep
-                    + c.debito + sep
-                    + c.categoria + sep
-                    + c.subcategoria + sep
-                    + c.detalle + sep
-                    + c.cuenta + "\n";*/
+            content += "D" + date + "\n"
+                    + "T" + (c.credito - c.debito) + "\n"
+                    + "P" + c.movimiento + "\n"
+                    + "L" + c.cuenta + "\n"
+                    + "^\n";
 
         }
 

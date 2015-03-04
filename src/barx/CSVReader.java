@@ -52,6 +52,9 @@ public class CSVReader {
             br = new BufferedReader(new FileReader(filename));
             while ((line = br.readLine()) != null) {
 
+                if (line.startsWith("#"))
+                    continue;
+                
                 // use comma as separator
                 String[] tokens = line.split(csvSplitBy);
 

@@ -85,7 +85,7 @@ public class GaliciaParser {
 
             Iterator<Element> td = row.next().select("td").iterator();
             String fecha = td.next().text();//fecha
-            String movimiento = td.next().text();//debito
+            String movimiento = td.next().text();
             String debitoAsString = td.next().text();//debito
             String creditoAsString = td.next().text();//credito
             String saldoAsText = td.next().text();//saldo
