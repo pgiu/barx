@@ -1,15 +1,19 @@
+#Version 2015
+#Educación
 GOETHE INSTITUT;Education
 INTERES CAPITALIZADO;Income:Interest Income:Savings Interest
 ATALAYA;Expenses:Dining
 HIPER CHASCOMUS SRL;Expenses:Groceries
 SUBSIDIO VACACIONAL;Income:Other Income
-PAGO TARJETA VISA;Liability:Visa
+#Tarjetas
+PAGO TARJETA VISA;Liabilities:Visa
+PAGO TARJETA MASTERCARD-INTERNET B. OPERACIÓN;Liabilities:MasterCard
 DEPORTES JUAN MANUEL;Expenses:Entertainment:Recreation
 YPF;Expenses:Auto:Gas
 EXTRACCION POR CAJEROS AUTOMATICOS;Assets:Current Assets:Efectivo
 DEVOL.IVA 4.13%;Income:Interest Income:Other Interest
 COMPRA DE DOLARES;Assets:Current Assets:USD-Casa
-ACREDITAMIENTO DE HABERES;Income:Salary
+ACREDITAMIENTO DE HABERES;Income:Salary:Autotrol
 DIA %;Expenses:Groceries
 TIENDA DIA;Expenses:Groceries
 COMPUTACION;Expenses:Computer
@@ -29,7 +33,7 @@ EASY;Expenses:Miscellaneous
 SANITARIOS CAROSIO;Expenses:Miscellaneous
 SUELDO ANUAL COMPLEMENTARIO;Income:Bonus
 SAN HUA;Expenses:Groceries
-HABERES INSTITUTO;Income:Salary:ITBA
+HABERES INSTITUTO TECNOL;Income:Salary:ITBA
 AVE CAESAR;Expenses:Dining
 MOSTAZA HAMBURGUESAS;Expenses:Dining
 JAUJA;Expenses:Dining
@@ -40,7 +44,6 @@ Carrefour;Expenses:Groceries
 STARBUCKS;Expenses:Dining
 PIACERE;Expenses:Dining
 MC DONALDS;Expenses:Dining
-PAGO TARJETA MASTERCARD;Liabilities:MasterCard
 COMPRA CON TARJETA GALICIA 24 A482 ZIRKEL;Expenses:Dining
 MANHATTAN CLUB;Expenses:Dining
 GNC PLUS;Expenses:Auto:Gas
