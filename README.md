@@ -1,5 +1,5 @@
 # barx
-**barx** (**b**ancos **ar**gentinos e**x**porter) es un exportador de información del estado de cuenta de Banco Galicia a CSV/QIF para usar en MoneyManagerEx, GnuCash, etc.
+**barx** (**b**ancos **ar**gentinos e**x**porter) es un exportador de información del estado de cuenta de Banco Galicia a CSV/QIF para usar en GnuCash, MoneyManagerEx, etc.
 
 # Objetivo y motivación
 **barx** es un parser para la información que da el Banco Galicia en su servicio de Home Banking.
@@ -21,14 +21,28 @@ Por ahora funciona de la siguiente manera:
 - Guardar la página a un archivo. 
 - Buscar en la carpeta donde se guardó el archivo resumen.htm (contiene la información relevante) y copiarlo a la carpeta dist de este proyecto.
 - Hacer 
-	java -jar GaliciaReader.jar Resumen2015.htm  output.csv
-(*nota* puede que haya errores o warnings, ignorarlos)
-- Importar output.csv en MoneyManagerEx usando la opción Formato MMEX y fecha en formato DD-MM-YYYY
+	java -jar GaliciaReader.jar resumen.htm outputName categorias_gastos.csv
+(*nota I* para ver una descripción de los parámetros ver sección parámetros.
+(*nota II* puede que haya errores o warnings, ignorarlos)
+- Importar output.qif en GnuCash (también puede usarse la salida CSV, pero tiene mas errores).
 
+# Parámetros
+GaliciaReader.jar resumen.htm outputName categorias_gastos.csv
 
+- *resumen.htm* es el resumen tal y como sale de la página del banco. 
+- *outputName* es el nombre del archivo de salida (sin la  terminación .csv ni .qif) 
+- *categorias_gastos.csv* es un archivo csv de dos columnas donde la columna de la izquierda es una expresión regular y la de la derecha es el nombre de la cuenta que se usa en GnuCash. 
+
+Ejemplo de categorias_gastos.csv
+```
+GOETHE INSTITUT;Education
+INTERES CAPITALIZADO;Income:Interest Income:Savings Interest
+ATALAYA;Expenses:Dining
+HIPER CHASCOMUS SRL;Expenses:Groceries
+```
 
 # Disclaimer
-Bajo ningún punto estoy afiliado o tengo intereses con el Banco Galicia. Este programa se distribuye bajo licencia GNU. 
+Bajo ningún punto estoy afiliado o tengo intereses con el Banco Galicia. Este programa se distribuye bajo licencia GNU GPL V2. 
 Siéntase libre de modificarlo a gusto siempre que cite este desarrollo como original. 
 
 # Dependencias y librerías externas
@@ -38,6 +52,4 @@ Este programa usa:
 
 # To Do list
 Esta no es una lista exhaustiva pero es un recordatorio de lo que sería interesante que este software pudiera hacer.
-- clasificación automática por categoría y subcategoria. Debería poder buscar regexps en el campo *movimiento* de la página del banco y mapearlo a un conjunto de categorías. Así se podría saber cuanto se consumo en un mismo local, o bien en un mismo rubro. 
 - detección de cobro de sueldo. Debería poder unirse las categorías como SAC, Bonos, Sueldo bajo un mismo paraguas para poder identificar cuanto se cobró de un mismo empleador. 
-- unificación de los intereses ganados / descuentos / etc.
